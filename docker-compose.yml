@@ -1,1 +1,9 @@
-
+services:
+  hw2web:
+    image: tommy6769/homework-2-web:latest
+    container_name: hw2web
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /home/appserver/homework-2
