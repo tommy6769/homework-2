@@ -7,10 +7,8 @@ pipeline
         DOCKERHUB_CREDENTIALS ='CYBR-3120'
         IMAGE_NAME ='tommy6769/levigametest'
     }
-
     stages
         {
-
         stage('Checkout SCM')
         {
             steps
@@ -18,7 +16,6 @@ pipeline
                 sh 'echo Checking out SCM...'
             }
         }
-
         stage('Cloning Git')
         {
             steps
@@ -26,35 +23,25 @@ pipeline
                 checkout scm
             }
         }
-
-
         stage('BUILD-AND-TAG')
         {
-            agent { label 'Levi-CYBER-3120-app-server'}
-            
+            agent { label 'Levi-CYBER-3120-app-server'}   
             steps
             {
-
-
                 script
                 {
                     // Build docker image using jenkins docker pipeline API
                     echo "Building Docker image ${IMAGE_NAME}..."
                     app = docker.build("${IMAGE_NAME}")
                     app.tag("latest")
-
                 }
             }
         }
-
         stage('POST-TO-DOCKERHUB')
         {
-            agent { label 'Levi-CYBER-3120-app-server'}
-            
+            agent { label 'Levi-CYBER-3120-app-server'}   
             steps
             {
-
-
                 script
                 {
                     echo "Pushing image ${IMAGE_NAME}:latest to Docker Hub..."
@@ -62,15 +49,12 @@ pipeline
                     {
                      app.push("latest")
                     }
-
                 }
             }
         }
-  
         stage('Deployment')
         {
-            agent { label 'Levi-CYBER-3120-app-server'}
-            
+            agent { label 'Levi-CYBER-3120-app-server'}   
             steps
             {
                 echo 'Starting deployment using docker-compose...'
