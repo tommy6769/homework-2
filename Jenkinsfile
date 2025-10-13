@@ -9,7 +9,16 @@ pipeline
     }
 
     stages
-    {
+        {
+
+        stage('Checkout SCM')
+        {
+            steps
+            {
+                sh 'echo Checking out SCM...'
+            }
+        }
+
         stage('Cloning Git')
         {
             steps
@@ -18,13 +27,6 @@ pipeline
             }
         }
 
-        stage('SAST')
-        {
-            steps
-            {
-                sh 'echo Running SAST scan with snyk...'
-            }
-        }
 
         stage('BUILD-AND-TAG')
         {
@@ -64,15 +66,7 @@ pipeline
                 }
             }
         }
-
-        stage('DAST')
-        {
-            steps
-            {
-                sh 'echo Running DAST scan...'
-            }
-        }        
-
+  
         stage('Deployment')
         {
             agent { label 'Levi-CYBER-3120-app-server'}
