@@ -51,22 +51,15 @@ pipeline
 
         stage('POST-TO-DOCKERHUB')
         {
-            agent { label 'Levi-CYBER-3120-app-server'}
-            
-            steps
-            {
-
-
-                script
-                {
-                    echo "Pushing image ${IMAGE_NAME}:latest to Docker Hub..."
-                    docker.withRegistry('https://registry.hub.docker.com',"${DOCKERHUB_CREDENTIALS}")
-                    {
-                     app.push("latest")
-                    }
-
-                }
+            agent { label 'Levi-CYBER-3120-app-server'} 
+          steps {
+            script {
+              echo "Pushing image ${IMAGE_NAME}:latest to Docker Hub"
+              docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
+                docker.image("${IMAGE_NAME}:latest").push()
+              }
             }
+          }
         }
 
         stage('DAST')
