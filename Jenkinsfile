@@ -42,8 +42,8 @@ pipeline
                 {
                     // Build docker image using jenkins docker pipeline API
                     echo "Building Docker image ${IMAGE_NAME}..."
-                    app = docker.build("${IMAGE_NAME}")
-                    app.tag("latest")
+                    def app = docker.build("${IMAGE_NAME}")
+                    app.tag("latest", true)
 
                 }
             }
@@ -93,7 +93,7 @@ pipeline
                         docker-compose up -d
                         docker ps
                     '''
-                    }
+                
                 }
                     echo 'Deployment completed successfully!'
             }
