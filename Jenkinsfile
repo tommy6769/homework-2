@@ -89,13 +89,17 @@ pipeline
                     dir("${WORKSPACE}")
                     {
                     sh '''
-                        docker-compose down
+                        set -e
+                        docker-compose down || true
+                        docker-compose pull || true
                         docker-compose up -d
                         docker ps
                     '''
                 
                 }
+                }
                     echo 'Deployment completed successfully!'
+                
             }
         }        
     }        
