@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  homework-2:
+    image: tommy6769/homework-2:latest
+    build: .
+    container_name: homework-2-container
+    ports:
+      - "80:80"
+    volumes: 
+      - ./:/app
