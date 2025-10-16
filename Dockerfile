@@ -1,12 +1,8 @@
 # use a lightweight Node.js image 
-FROM node:18-alpine
+FROM httpd:2.4
+COPY . /usr/local/apache2/htdocs
 
-# set working directory
-WORKDIR /app
-
-
-# Copy the rest of the code
-COPY . .
 
 # Expose Port 3000
-EXPOSE 8880
+EXPOSE 80
+CMD ["httpd-foreground"]
