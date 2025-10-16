@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   homework-2:
-    image: tommy6769/homework-2:latest
+    image: tommy6769/homework-2
     container_name: homework-2
     restart: always
     ports:
-      - "8880:80"
+      - "80:80"
     volumes: 
       - /home/appserver/homework-2/homework-2
